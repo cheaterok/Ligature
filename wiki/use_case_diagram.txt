@@ -1,0 +1,7 @@
+[Reader]-(Order book), (Order book)>(Pay the order),
+[Reader]-(Download ordered book)
+[Writer]-(Upload book), (Upload book)>(Sign license)
+[Writer]-(Order paper books), (Order paper books)>(Pay the order), (Pay the order)<(Receive package)
+[Publisher]-(Check uploaded book), (Check uploaded book)<(Publish book)
+[Publisher]-(Calculate paper edition cost), (Calculate paper edition cost)<(Print the book), (Print the book)>(Send package)
+
