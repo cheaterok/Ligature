@@ -16,14 +16,4 @@ class Order:
         self.status = self.Status.ISSUED
         self.cost = None
         self.payment = None
-
-
-class OnlineOrder(Order):
-    pass
-
-
-class PrintingOrder(Order):
-
-    def __init__(self, client, service, publication, quantity):
-        super().__init__(client, service, publication)
-        self.quantity = quantity
+        self.quantity = None
