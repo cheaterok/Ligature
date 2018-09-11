@@ -21,7 +21,7 @@ CREATE TABLE Owner2Book (
 
 CREATE TABLE Payment (
     id INTEGER PRIMARY KEY,
-    "from" INTEGER REFERENCES User(id),
+    from_ INTEGER REFERENCES User(id),
     "to" INTEGER REFERENCES User(id),
     quantity INTEGER
 );
