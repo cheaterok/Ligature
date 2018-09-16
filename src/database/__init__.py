@@ -1,1 +1,1 @@
-from .database import Database, DatabaseEntry
+from .database import Database
