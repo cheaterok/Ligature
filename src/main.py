@@ -19,6 +19,8 @@ CURRENT_INFO = {}
 class Application(Tk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.style = Style()
+        self.style.theme_use("clam")
         self.cur_window = None
         self.switch_window(LoginWindow(self))
 
