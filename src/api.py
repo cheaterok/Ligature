@@ -6,11 +6,17 @@ from models import User, Publication
 
 @hug.local()
 @db_session
-def create_user(name):
+def create_user(username):
     "Создаёт пользователя с указанным именем."
-    new_user = User(name=name)
+    new_user = User(name=username)
     commit()  # Нужно закоммитить, чтобы получить id
     return {'id': new_user.id}
+
+@hug.get("/login")
+@db_session
+def login(username: hug.types.text):
+    user = select(user for user in User if user.name == username).first()
+    return {'id': user.id, 'name': user.name}
 
 @hug.local()
 @db_session

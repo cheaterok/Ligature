@@ -1,7 +1,7 @@
 'use strict';
 
 
-const serverAddress = "127.0.0.1:5000";
+const serverAddress = "http://localhost:5000";
 
 
 class App extends React.Component {
@@ -34,15 +34,20 @@ class App extends React.Component {
 
     login() {
         const formData = new FormData(document.getElementById("login-form"));
-        const username = formData.get("username");
-        if (username == '')
+        const userName = formData.get("username");
+        const userType = document.getElementById("select-type").value;
+        if (userName == '')
             return;
         else {
-            this.setState({
-                id: 1,
-                userName: username,
-                userType: "Reader",
-            });
+            fetch(serverAddress + "/login?username=" + userName)
+                .then((response) => response.json())
+                .then((json) =>
+                    this.setState({
+                        id: json.id,
+                        userName: json.name,
+                        userType: userType
+                    })
+                );
         }
     }
 
@@ -54,6 +59,11 @@ class App extends React.Component {
                     <h3 style={{ marginBottom: 3 + 'rem' }}>
                         <em>Publishing house & Book store</em>
                     </h3>
+                    <select id="select-type">
+                        <option value="Reader">Reader</option>
+                        <option value="Writer">Writer</option>
+                        <option value="Publisher">Publisher</option>
+                    </select>
                     <form id="login-form" className="login-form">
                         <input className="input" type="text" name="username" placeholder="Username"></input>
                         <button className="login-form-btn" type="button" onClick={() => this.login()}>Login / Register</button>
