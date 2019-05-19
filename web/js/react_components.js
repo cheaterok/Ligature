@@ -20,6 +20,8 @@ class App extends React.Component {
             return this.renderLoginPage();
         else if (this.state.special == "PublishBook")
             return this.renderPublishPage();
+        else if (this.state.special == "OrderPrinting")
+            return this.renderPrintingPage();
         else {
             switch (this.state.userType) {
                 case "Reader":
@@ -256,6 +258,12 @@ class App extends React.Component {
                                 type="button"
                                 onClick={() => this.setState({special: "PublishBook"})}>Publish book</button>
                         </div>
+                        <div className="container-login-form-btn">
+                            <button className="login-form-btn"
+                                style={{ width: "30%" }}
+                                type="button"
+                                onClick={() => this.setState({special: "OrderPrinting"})}>Order Printing</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -313,6 +321,43 @@ class App extends React.Component {
                                     type="button"
                                     onClick={() => this.reviewBook("Reject")}>Reject</button>
                             </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        );
+    }
+
+    orderBooks() {
+        const book = document.getElementById("Published").value;
+        const quantity = document.getElementById("quantity").value;
+        alert(book + " ordered. Quantity: " +  quantity); 
+        this.setState({special: null});
+    }
+
+    renderPrintingPage() {
+        return (
+            <div className="masthead d-flex">
+                <div className="container text-center my-auto">
+                    <form>
+                        <div className="row h-100">
+                            <div className="col-md-12 form-group text-center">
+                                <label htmlFor="Published">Published</label>
+                                <select size="5" className="form-control" id="Published">
+                                if (this.state.publishedBooks.length != 0) {
+                                    this.state.publishedBooks.map((book) =>
+                                        <option>{book}</option>
+                                    )
+                                }
+                                </select>
+                            </div>
+                        </div>
+                        <input type="text" id="quantity"></input>
+                        <div className="container-login-form-btn">
+                            <button className="login-form-btn"
+                                style={{ width: "30%" }}
+                                type="button"
+                                onClick={() => this.orderBooks()}>Order</button>
                         </div>
                     </form>
                 </div>
